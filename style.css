@@ -1,0 +1,677 @@
+/* ==========================================
+   META CONNECTION — DESIGN SYSTEM & STYLES
+   ========================================== */
+
+/* CSS Variables for Dark/Light Theme & Design Tokens */
+:root {
+  --font-primary: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  /* Color Palette (Sleek Modern Tech Tone) */
+  --bg-main: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-card-border: #e2e8f0;
+  
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-accent: #0064e0;
+  
+  --brand-gradient: linear-gradient(135deg, #0064e0 0%, #0082fb 50%, #00c6ff 100%);
+  --brand-gradient-hover: linear-gradient(135deg, #0056c6 0%, #0073e6 50%, #00b4ea 100%);
+  
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 10px 30px -5px rgba(0, 100, 224, 0.08), 0 4px 12px rgba(15, 23, 42, 0.05);
+  --shadow-lg: 0 20px 40px -10px rgba(0, 100, 224, 0.15), 0 8px 24px rgba(15, 23, 42, 0.08);
+  
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 9999px;
+  
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] {
+  --bg-main: #0b0f19;
+  --bg-surface: #141c2e;
+  --bg-surface-hover: #1e293b;
+  --bg-card: #141c2e;
+  --bg-card-border: #24324d;
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-accent: #38bdf8;
+  
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.7);
+}
+
+/* Reset & Base Setup */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  line-height: 1.6;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header Styling */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(248, 250, 252, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--bg-card-border);
+  transition: background var(--transition-normal), border-color var(--transition-normal);
+}
+
+[data-theme="dark"] .site-header {
+  background: rgba(11, 15, 25, 0.85);
+}
+
+.header-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+.meta-icon {
+  width: 38px;
+  height: 26px;
+  transition: transform var(--transition-bounce);
+}
+
+.brand-logo:hover .meta-icon {
+  transform: scale(1.08) rotate(-3deg);
+}
+
+.brand-text {
+  font-family: var(--font-primary);
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color var(--transition-fast);
+  position: relative;
+}
+
+.nav-item:hover, .nav-item.active {
+  color: var(--text-accent);
+}
+
+.nav-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--brand-gradient);
+  border-radius: 2px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icon-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-card-border);
+  color: var(--text-primary);
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.25rem;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.icon-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--text-accent);
+  color: var(--text-accent);
+}
+
+.sun-icon { display: none; }
+[data-theme="dark"] .moon-icon { display: none; }
+[data-theme="dark"] .sun-icon { display: block; }
+
+.cta-button {
+  background: var(--brand-gradient);
+  color: #ffffff;
+  text-decoration: none;
+  padding: 0.65rem 1.35rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 14px rgba(0, 100, 224, 0.3);
+  transition: all var(--transition-fast);
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 100, 224, 0.45);
+}
+
+/* ==========================================
+   SECTION 1: MISSION & HERO (EXACT USER SPEC)
+   ========================================== */
+
+.mission-section {
+  padding: 4.5rem 1.5rem 3.5rem;
+  text-align: center;
+}
+
+.section-container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+/* SPEC 1: Context (font kecil, uppercase, center paragraph, bold): OUR MISSION */
+.mission-context {
+  font-family: var(--font-primary);
+  font-size: 0.85rem;            /* font kecil */
+  text-transform: uppercase;     /* uppercase */
+  text-align: center;            /* center paragraph */
+  font-weight: 800;              /* bold */
+  letter-spacing: 0.18em;
+  color: var(--text-accent);
+  margin-bottom: 1rem;
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  background: rgba(0, 100, 224, 0.08);
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(0, 100, 224, 0.15);
+}
+
+/* SPEC 2: Judul (font besar, sentence case, center paragraph, bold): Build the future of human connection and the technology that makes it possible */
+.mission-title {
+  font-family: var(--font-primary);
+  font-size: clamp(2.25rem, 5vw, 3.8rem); /* font besar */
+  text-transform: none;                    /* sentence case */
+  text-align: center;                      /* center paragraph */
+  font-weight: 800;                        /* bold */
+  line-height: 1.16;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  max-width: 920px;
+  margin: 0 auto 3rem auto;
+}
+
+/* SPEC 3: Gambar berwarna memperlihatkan pria yang hanya memperlihatkan sebagian wajah dengan kedua mata berwarna biru */
+.hero-image-wrapper {
+  position: relative;
+  max-width: 1060px;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  padding: 8px;
+  background: linear-gradient(135deg, rgba(0,100,224,0.3), rgba(0,198,255,0.1), rgba(255,255,255,0.05));
+  box-shadow: var(--shadow-lg);
+}
+
+.hero-image-card {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background-color: var(--bg-surface);
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+  display: block;
+}
+
+.hero-image-card:hover .hero-img {
+  transform: scale(1.03);
+}
+
+.image-overlay {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 2;
+}
+
+.badge-tag {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #ffffff;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.badge-tag i {
+  color: #38bdf8;
+}
+
+/* ==========================================
+   SECTION 2: PRINCIPLES (EXACT USER SPEC)
+   ========================================== */
+
+.principles-section {
+  padding: 5rem 1.5rem 6rem;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 100, 224, 0.03) 100%);
+  border-top: 1px solid var(--bg-card-border);
+}
+
+/* SPEC 4: Sub Judul (font medium, sentence case, left paragraph, bold): Our principles */
+.principles-subtitle {
+  font-family: var(--font-primary);
+  font-size: clamp(1.75rem, 3.5vw, 2.4rem); /* font medium */
+  text-transform: none;                      /* sentence case */
+  text-align: left;                          /* left paragraph */
+  font-weight: 700;                          /* bold */
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+/* SPEC 5: Isi teks (font kecil, sentence case, left paragraph) */
+.principles-lead-text {
+  font-family: var(--font-body);
+  font-size: 1.05rem;                       /* font kecil / body standard */
+  text-transform: none;                     /* sentence case */
+  text-align: left;                         /* left paragraph */
+  color: var(--text-secondary);
+  max-width: 820px;
+  line-height: 1.68;
+  margin-bottom: 3rem;
+}
+
+/* SPEC 6: Isi setelah teks isi: Two column grid */
+.principles-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* SPEC 6 (1): Left Column - Kotak Daftar (a - e) dengan simbol + sebagai fitur tombol */
+.principles-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.principle-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--bg-card-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+  overflow: hidden;
+}
+
+.principle-card:hover {
+  border-color: rgba(0, 100, 224, 0.4);
+  box-shadow: var(--shadow-md);
+  transform: translateX(4px);
+}
+
+.principle-card.active {
+  border-color: var(--text-accent);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-md);
+}
+
+.principle-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.principle-letter {
+  font-family: var(--font-primary);
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--text-accent);
+  background: rgba(0, 100, 224, 0.08);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.principle-title {
+  font-family: var(--font-primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  flex-grow: 1;
+  text-align: left;
+}
+
+/* Simbol + sebagai fitur tombol interaktif */
+.expand-btn {
+  background: var(--bg-surface-hover);
+  border: 1px solid var(--bg-card-border);
+  color: var(--text-primary);
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  transition: all var(--transition-bounce);
+}
+
+.expand-btn:hover {
+  background: var(--text-accent);
+  color: #ffffff;
+  border-color: var(--text-accent);
+}
+
+.principle-card.active .expand-btn {
+  background: var(--text-accent);
+  color: #ffffff;
+  border-color: var(--text-accent);
+  transform: rotate(45deg); /* converts + icon into x / close icon */
+}
+
+/* Expandable content area */
+.principle-card-body {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out, opacity 0.3s ease, margin-top 0.3s ease;
+  margin-top: 0;
+}
+
+.principle-card.active .principle-card-body {
+  max-height: 220px;
+  opacity: 1;
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px dashed var(--bg-card-border);
+}
+
+.principle-description {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 0.9rem;
+}
+
+.principle-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.stat-pill {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-accent);
+  background: rgba(0, 100, 224, 0.07);
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* SPEC 6 (2): Right Column - Gambar berwarna orang-orang mahasiswa (2 wanita dan 2 pria) */
+.principles-media-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: sticky;
+  top: 6rem;
+}
+
+.students-image-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--bg-card);
+  border: 1px solid var(--bg-card-border);
+  box-shadow: var(--shadow-md);
+}
+
+.students-img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.students-image-card:hover .students-img {
+  transform: scale(1.04);
+}
+
+.students-card-caption {
+  padding: 1.25rem 1.5rem;
+  background: var(--bg-surface);
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  border-top: 1px solid var(--bg-card-border);
+}
+
+.caption-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--brand-gradient);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+
+.caption-title {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+
+.caption-subtitle {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.interactive-highlight-box {
+  background: var(--bg-card);
+  border: 1px solid var(--bg-card-border);
+  border-left: 4px solid var(--text-accent);
+  border-radius: var(--radius-md);
+  padding: 1.2rem 1.4rem;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.highlight-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-accent);
+  margin-bottom: 0.4rem;
+}
+
+.highlight-icon {
+  font-size: 1.2rem;
+}
+
+.highlight-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Footer Styling */
+.site-footer {
+  background-color: var(--bg-surface);
+  border-top: 1px solid var(--bg-card-border);
+  padding: 2.5rem 1.5rem;
+}
+
+.footer-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.footer-logo {
+  font-family: var(--font-primary);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+}
+
+.footer-copy {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.footer-links a:hover {
+  color: var(--text-accent);
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN (TABLET & MOBILE)
+   ========================================== */
+
+@media (max-width: 992px) {
+  .principles-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .principles-media-container {
+    position: static;
+  }
+  
+  .hero-image-card {
+    height: 380px;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav-links {
+    display: none;
+  }
+  
+  .mission-section {
+    padding-top: 3rem;
+  }
+  
+  .hero-image-card {
+    height: 280px;
+  }
+  
+  .students-img {
+    height: 280px;
+  }
+  
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+}
